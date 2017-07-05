@@ -1,0 +1,17 @@
+{
+	"name": "Twitter Origin Pic",
+	"description": "Download the original picture file in twitter",
+	"version": "0.0.0.1",
+	"minimum_chrome_version": "22",
+	"permissions": [ "contextMenus", "tabs", "downloads"],	
+	"background": {
+		"scripts": ["eventPage.js"]
+	},
+	"icons": {
+		"16": "16.png",
+		"48": "48.png",
+		"128": "128.png"
+	},
+	"update_url": "http://clients2.google.com/service/update2/crx",
+	"manifest_version": 2
+}
