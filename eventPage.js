@@ -2,19 +2,33 @@ function createMenu(){
 	chrome.contextMenus.create({
 		"title": "Download Origin", 
 		"id": "downloader", 
-		"contexts": ["image"],
-		"documentUrlPatterns": ["https://twitter.com/*"]
+		"contexts": ["image", "link"],
+		"documentUrlPatterns": ["https://twitter.com/*", "https://pawoo.net/*"]
 	});
 }
 
 function doSearch(info, tab){
-	var src = info.srcUrl;
+
+	var site;
+	var src;
+	var url;
+
+	if (info.pageUrl.match(/https:\/\/twitter\.com\/.*/)) site = "twitter";
+	else if (info.pageUrl.match(/https:\/\/pawoo\.net\/.*/)) site = "pawoo";
+
+	if (site === "twitter")	{
+		src = info.srcUrl;
+		url = src+":orig";
+	}
+	else if (site === "pawoo") {
+		src = info.linkUrl;
+		url = src;
+	}
 
 	if (src.indexOf('data:') == 0) {
 		// incompatible
 		alert("Not Yet Compatible With Data URIs");
 	}else{
-		var url = src+":orig";
 		chrome.downloads.download({
 		  url: url,
 		  filename: src.replace(/^.*\//, ''),
