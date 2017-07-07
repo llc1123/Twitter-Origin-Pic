@@ -1,11 +1,11 @@
 {
 	"name": "Twitter Origin Pic",
 	"description": "Download the original picture file in twitter",
-	"version": "0.0.0.3",
+	"version": "0.0.0.5",
 	"minimum_chrome_version": "22",
 	"permissions": [ "contextMenus", "activeTab", "downloads"],	
 	"background": {
-		"scripts": ["eventPage.js"]
+		"scripts": ["eventPage.js", "moment.min.js"]
 	},
 	"content_scripts": [
 	    {
@@ -13,6 +13,7 @@
 	      "js": ["contentScripts.js"]
 	    }
 	],
+	"options_page": "options.html",
 	"icons": {
 		"16": "16.png",
 		"48": "48.png",
