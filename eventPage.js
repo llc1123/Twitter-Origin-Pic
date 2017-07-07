@@ -1,47 +1,52 @@
-function createMenu(){
-	chrome.contextMenus.create({
-		"title": "Download Origin", 
-		"id": "downloader", 
-		"contexts": ["image", "link"],
-		"documentUrlPatterns": ["https://twitter.com/*", "https://pawoo.net/*"]
-	});
-}
-
-function doSearch(info, tab){
+function doSearch(info){
 
 	var site;
-	var src;
+	var filename;
 	var url;
 
 	if (info.pageUrl.match(/https:\/\/twitter\.com\/.*/)) site = "twitter";
 	else if (info.pageUrl.match(/https:\/\/pawoo\.net\/.*/)) site = "pawoo";
 
 	if (site === "twitter")	{
-		src = info.srcUrl;
-		url = src+":orig";
+		url = info.srcUrl+":orig";
+		filename = info.srcUrl.replace(/^.*\//, '');
 	}
 	else if (site === "pawoo") {
-		src = info.linkUrl;
-		url = src;
+		url = info.linkUrl;
+		filename = info.linkUrl.replace(/^.*\//, '');
 	}
 
-	if (src.indexOf('data:') == 0) {
-		// incompatible
-		alert("Not Yet Compatible With Data URIs");
-	}else{
-		chrome.downloads.download({
-		  url: url,
-		  filename: src.replace(/^.*\//, ''),
-		  saveAs: true
-		});
-	}
+	chrome.downloads.download({
+        url: url,
+        filename: filename,
+        saveAs: true
+	});
+
 	return true;
 }
 
-function initialize(){
-	createMenu();
+function initialize(isValid){
+	if (isValid){
+		chrome.contextMenus.removeAll();
+		chrome.contextMenus.create({
+			"title": "Download Origin", 
+			"id": "downloader", 
+			"contexts": ["image", "link"],
+			"documentUrlPatterns": ["https://twitter.com/*", "https://pawoo.net/*"]
+		});
+	}else{
+		chrome.contextMenus.removeAll();
+	}
+
+	chrome.runtime.sendMessage({
+	    type: "initialize"
+	})
 }
 
-chrome.runtime.onInstalled.addListener(initialize);
-chrome.runtime.onStartup.addListener(initialize);
+chrome.runtime.onMessage.addListener(function(request, sender, callback) {
+    if (request.type == 'content') {
+        callback(initialize(request.isValid));
+    }
+});
+
 chrome.contextMenus.onClicked.addListener(doSearch);

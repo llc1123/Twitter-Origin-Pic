@@ -1,12 +1,18 @@
 {
 	"name": "Twitter Origin Pic",
 	"description": "Download the original picture file in twitter",
-	"version": "0.0.0.2",
+	"version": "0.0.0.3",
 	"minimum_chrome_version": "22",
-	"permissions": [ "contextMenus", "tabs", "downloads"],	
+	"permissions": [ "contextMenus", "activeTab", "downloads"],	
 	"background": {
 		"scripts": ["eventPage.js"]
 	},
+	"content_scripts": [
+	    {
+	      "matches": ["https://twitter.com/*"],
+	      "js": ["contentScripts.js"]
+	    }
+	],
 	"icons": {
 		"16": "16.png",
 		"48": "48.png",
