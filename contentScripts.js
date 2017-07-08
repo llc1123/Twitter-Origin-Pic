@@ -1,4 +1,4 @@
-document.body.onmouseup = function (img){
+document.body.onmousedown = function (img){
 
 	var isValid = false;
 	var tweet = {

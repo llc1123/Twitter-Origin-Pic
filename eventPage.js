@@ -40,8 +40,7 @@ function download(info){
 	});
 }
 
-function initialize(isValid){
-    if(localStorage.getItem("fn-twitter") === null) localStorage["fn-twitter"] = "%filename%";
+function createMenu(isValid){
     chrome.contextMenus.removeAll();
     if (isValid){
         chrome.contextMenus.create({
@@ -53,11 +52,17 @@ function initialize(isValid){
     }
 }
 
-
 chrome.runtime.onMessage.addListener(function(request, sender, callback) {
     if (request.type == 'twiContent') {
         site = "twitter";
-        initialize(request.isValid);
+        createMenu(request.isValid);
         content = request.tweet;
     }
 });
+
+function initialize(){
+    if(localStorage.getItem("fn-twitter") === null) localStorage["fn-twitter"] = "%filename%";
+}
+
+chrome.runtime.onInstalled.addListener(initialize);
+chrome.runtime.onStartup.addListener(initialize);
