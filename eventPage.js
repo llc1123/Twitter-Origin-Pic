@@ -6,14 +6,14 @@ String.prototype.replaceAll = function(search, replacement) {
     return target.replace(new RegExp(search, 'g'), replacement);
 }
 
-function download(info){
+function download(){
 
 	var fn;
 	var url;
 
 	if (site === "twitter")	{
-		url = info.srcUrl+":orig";
-		var filename = info.srcUrl.replace(/^.*\//, "");
+		url = content.imgUrl+":orig";
+		var filename = content.imgUrl.replace(/^.*\//, "");
         var name = filename.replace(/\.[^/.]+$/, "");
         var ext = filename.replace(name+'.',"");
 
