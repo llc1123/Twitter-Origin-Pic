@@ -6,7 +6,7 @@ String.prototype.replaceAll = function(search, replacement) {
     return target.replace(new RegExp(search, 'g'), replacement);
 }
 
-function doSearch(info){
+function download(info){
 
 	var fn;
 	var url;
@@ -27,46 +27,37 @@ function doSearch(info){
                                        .replaceAll("%tweettext%", content.tweetText)
                                        .replaceAll("%tweetid%", content.tweetId)
                                        .replaceAll("%filename%", name)
+                                       .replaceAll('\n',' ')
+                                       .replaceAll(/[\\\/:\*\?"<>\|]/,'_')
                                        +"."+ext;
 
 	}
-	// else if (site === "pawoo") {
-	// 	url = info.linkUrl;
-	// 	filename = info.linkUrl.replace(/^.*\//, '');
-	// }
-
-    console.log(content);
 
 	chrome.downloads.download({
         url: url,
         filename: fn,
         saveAs: true
 	});
-
-	return true;
 }
 
-function initialize(){
+function initialize(isValid){
     if(localStorage.getItem("fn-twitter") === null) localStorage["fn-twitter"] = "%filename%";
     chrome.contextMenus.removeAll();
-	chrome.contextMenus.create({
-		"title": "Download Origin", 
-		"id": "downloader", 
-		"contexts": ["image"],
-		"documentUrlPatterns": ["https://twitter.com/*"],
-        "targetUrlPatterns": ["https://pbs.twimg.com/media/*"]
-	});
+    if (isValid){
+        chrome.contextMenus.create({
+            "title": "Download Origin", 
+            "id": "downloader", 
+            "contexts": ["all"],
+            "onclick": download
+        });
+    }
 }
 
 
 chrome.runtime.onMessage.addListener(function(request, sender, callback) {
     if (request.type == 'twiContent') {
         site = "twitter";
-        isValid = request.isValid;
+        initialize(request.isValid);
         content = request.tweet;
     }
 });
-
-chrome.runtime.onInstalled.addListener(initialize);
-chrome.runtime.onStartup.addListener(initialize);
-chrome.contextMenus.onClicked.addListener(doSearch);

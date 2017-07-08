@@ -1,4 +1,4 @@
-window.oncontextmenu = function (img){
+document.body.onmouseup = function (img){
 
 	var isValid = false;
 	var tweet = {
