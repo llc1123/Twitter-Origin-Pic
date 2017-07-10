@@ -19,17 +19,18 @@ function download(){
 
         var date = new moment(content.timestamp, "x");
 
-        fn = localStorage["subfolder"]+"/"
-            +localStorage["fn-twitter"].replaceAll("%picid%", content.picId)
+        fn = localStorage["fn-twitter"].replaceAll("%picid%", content.picId)
                                        .replaceAll("%userid%", content.userId)
                                        .replaceAll("%username%", content.userName)
-                                       .replaceAll("%fullname%", content.fullName)
+                                       .replaceAll("%fullname%", content.fullName.replaceAll(/\//,'_'))
                                        .replaceAll("%time%", date.format(localStorage["time-format"]))
-                                       .replaceAll("%tweettext%", content.tweetText)
+                                       .replaceAll("%tweettext%", content.tweetText.replaceAll(/\//,'_'))
                                        .replaceAll("%tweetid%", content.tweetId)
                                        .replaceAll("%filename%", name)
                                        .replaceAll('\n',' ')
-                                       .replaceAll(/[\\\/:\*\?"<>\|]/,'_')
+                                       .replaceAll(/[\\:\*\?"<>\|]/,'_')
+                                       .replaceAll(/ *\/ */,'/')
+                                       .replace(/\/$/, '')
                                        +"."+ext;
 
 	}

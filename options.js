@@ -1,7 +1,5 @@
 function saveSettings() {
 
-	select = document.getElementById("subfolder");
-	localStorage["subfolder"] = select.value;
 	select = document.getElementById("fn-twitter");
 	localStorage["fn-twitter"] = select.value;
 	select = document.getElementById("time-format");
@@ -17,8 +15,7 @@ function saveSettings() {
 }
 
 function loadSettings() {
-	select = document.getElementById("subfolder");
-	select.value = localStorage["subfolder"];
+
 	select = document.getElementById("fn-twitter");
 	select.value = localStorage["fn-twitter"];
 	select = document.getElementById("time-format");

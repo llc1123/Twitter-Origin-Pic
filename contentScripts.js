@@ -1,6 +1,6 @@
 var picId = null;
 
-document.body.onmousedown = function (img){
+document.onmousedown = function (img){
 
 	var isValid = false;
 	var tweet = {
@@ -57,7 +57,7 @@ document.body.onmousedown = function (img){
 	}
 
 	else if (img.target.classList.contains("media-image") || img.target.classList.contains("GalleryNav")){
-		
+
 		isValid = true;
 
 		var content;
