@@ -1,7 +1,7 @@
 {
 	"name": "Twitter Origin Pic",
 	"description": "Download the original picture file in twitter",
-	"version": "0.1.2",
+	"version": "0.1.3",
 	"minimum_chrome_version": "22",
 	"permissions": [ "contextMenus", "activeTab", "downloads"],	
 	"background": {

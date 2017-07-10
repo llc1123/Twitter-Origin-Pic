@@ -68,5 +68,7 @@ function initialize(){
     if(localStorage.getItem("time-format") === null) localStorage["time-format"] = "YYYY-MM-DD HH-mm-ss";
 }
 
+chrome.tabs.onActivated.addListener(function(){createMenu(false)})
+chrome.tabs.onUpdated.addListener(function(){createMenu(false)})
 chrome.runtime.onInstalled.addListener(initialize);
 chrome.runtime.onStartup.addListener(initialize);
