@@ -19,7 +19,8 @@ function download(){
 
         var date = new moment(content.timestamp, "x");
 
-        fn = localStorage["fn-twitter"].replaceAll("%picid%", content.picId)
+        fn = localStorage["subfolder"]+"/"
+            +localStorage["fn-twitter"].replaceAll("%picid%", content.picId)
                                        .replaceAll("%userid%", content.userId)
                                        .replaceAll("%username%", content.userName)
                                        .replaceAll("%fullname%", content.fullName)
@@ -36,7 +37,7 @@ function download(){
 	chrome.downloads.download({
         url: url,
         filename: fn,
-        saveAs: true
+        saveAs: localStorage["save-as"]==="true"
 	});
 }
 
@@ -61,6 +62,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, callback) {
 });
 
 function initialize(){
+    if(localStorage.getItem("subfolder") === null) localStorage["subfolder"] = "twitter-origin-pic";
     if(localStorage.getItem("fn-twitter") === null) localStorage["fn-twitter"] = "%filename%";
     if(localStorage.getItem("time-format") === null) localStorage["time-format"] = "YYYY-MM-DD HH-mm-ss";
 }

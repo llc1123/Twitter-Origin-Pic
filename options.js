@@ -1,9 +1,13 @@
 function saveSettings() {
 
+	select = document.getElementById("subfolder");
+	localStorage["subfolder"] = select.value;
 	select = document.getElementById("fn-twitter");
 	localStorage["fn-twitter"] = select.value;
 	select = document.getElementById("time-format");
 	localStorage["time-format"] = select.value;
+	select = document.getElementById("save-as");
+	localStorage["save-as"] = select.checked;
 
 	var status = document.getElementById("status");
 	status.innerHTML = "Changes Applied...";
@@ -13,10 +17,15 @@ function saveSettings() {
 }
 
 function loadSettings() {
+	select = document.getElementById("subfolder");
+	select.value = localStorage["subfolder"];
 	select = document.getElementById("fn-twitter");
 	select.value = localStorage["fn-twitter"];
 	select = document.getElementById("time-format");
 	select.value = localStorage["time-format"];
+	select = document.getElementById("save-as");
+	if (localStorage["save-as"] === "true") select.setAttribute("checked", "checked");
+	else select.removeAttribute("checked");
 }
 
 function showTime(){

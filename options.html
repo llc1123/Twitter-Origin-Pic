@@ -7,14 +7,25 @@
 <body>
 <div style="font-size:large;">Twitter Origin Pic Options</div>
 <br>
+
+Save at Subfolder
+<br><br>
+<input type="text" id="subfolder" size="64"/>
+<br><br>
+
 Save as filename (Twitter): %picid% %userid% %username% %fullname% %time% %tweettext% %tweetid% %filename%
 <br><br>
 <input type="text" id="fn-twitter" size="64"/>.(jpg/png)
 <br><br>
+
 Time Format (default: YYYY-MM-DD HH-mm-ss)
 <br><br>
 <input type="text" id="time-format" size="64"/><span id="time"></span>
 <br><br>
+
+<label><input type="checkbox" id="save-as">Show 'Save As' dialog</label>
+<br><br>
+
 <button id="saveSettings">Apply</button>
 <span id="status"/>
 </body>
