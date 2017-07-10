@@ -2,16 +2,19 @@
 <head>
 <title>Twitter Origin Pic Options</title>
 </head>
+<script src="moment.min.js"></script>
 <script src="options.js"></script>
 <body>
 <div style="font-size:large;">Twitter Origin Pic Options</div>
 <br>
 Save as filename (Twitter): %picid% %userid% %username% %fullname% %time% %tweettext% %tweetid% %filename%
-
 <br><br>
 <input type="text" id="fn-twitter" size="64"/>.(jpg/png)
 <br><br>
-
+Time Format (default: YYYY-MM-DD HH-mm-ss)
+<br><br>
+<input type="text" id="time-format" size="64"/><span id="time"></span>
+<br><br>
 <button id="saveSettings">Apply</button>
 <span id="status"/>
 </body>

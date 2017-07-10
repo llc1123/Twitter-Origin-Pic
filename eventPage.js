@@ -23,7 +23,7 @@ function download(){
                                        .replaceAll("%userid%", content.userId)
                                        .replaceAll("%username%", content.userName)
                                        .replaceAll("%fullname%", content.fullName)
-                                       .replaceAll("%time%", date.format("YYYY-MM-DD HH-mm-ss"))
+                                       .replaceAll("%time%", date.format(localStorage["time-format"]))
                                        .replaceAll("%tweettext%", content.tweetText)
                                        .replaceAll("%tweetid%", content.tweetId)
                                        .replaceAll("%filename%", name)
@@ -62,6 +62,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, callback) {
 
 function initialize(){
     if(localStorage.getItem("fn-twitter") === null) localStorage["fn-twitter"] = "%filename%";
+    if(localStorage.getItem("time-format") === null) localStorage["time-format"] = "YYYY-MM-DD HH-mm-ss";
 }
 
 chrome.runtime.onInstalled.addListener(initialize);

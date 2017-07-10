@@ -47,13 +47,17 @@ document.body.onmousedown = function (img){
 								.replace(/<img class="Emoji.+? alt="(.+?)".+?>/g,'$1')
 								.replace(/<a .+? data-expanded-url="https?:\/\/(.+?)" .+?>.+?<\/a>/g,'$1')
 								.replace(/<a .+?><s>(#|@)<\/s><b>(.+?)<\/b><\/a>/g,'$1$2')
-								.replace(/<a href="https:\/\/t.co\/\w+" class="twitter-timeline-link u-hidden".+?>.+?<\/a>$/g,'');
+								.replace(/<a href="https:\/\/t.co\/\w+" class="twitter-timeline-link u-hidden".+?>.+?<\/a>$/g,'')
+								.replace(/&(amp|lt|gt|quot|#39|#x2F|#x60);/g,function(all,a){
+												return {amp:'&', lt:'<', gt:'>', quot:'"', '#39':'\'', '#x2F':'/', '#x60':'`' }[a];
+											});
 		tweet.tweetId = content.querySelector(".time a").getAttribute("data-conversation-id");
 
 		tweet.imgUrl = img.target.src;
 	}
 
 	else if (img.target.classList.contains("media-image") || img.target.classList.contains("GalleryNav")){
+		
 		isValid = true;
 
 		var content;
@@ -89,7 +93,10 @@ document.body.onmousedown = function (img){
 								.replace(/<img class="Emoji.+? alt="(.+?)".+?>/g,'$1')
 								.replace(/<a .+? data-expanded-url="https?:\/\/(.+?)" .+?>.+?<\/a>/g,'$1')
 								.replace(/<a .+?><s>(#|@)<\/s><b>(.+?)<\/b><\/a>/g,'$1$2')
-								.replace(/<a href="https:\/\/t.co\/\w+" class="twitter-timeline-link u-hidden".+?>.+?<\/a>$/g,'');
+								.replace(/<a href="https:\/\/t.co\/\w+" class="twitter-timeline-link u-hidden".+?>.+?<\/a>$/g,'')
+								.replace(/&(amp|lt|gt|quot|#39|#x2F|#x60);/g,function(all,a){
+												return {amp:'&', lt:'<', gt:'>', quot:'"', '#39':'\'', '#x2F':'/', '#x60':'`' }[a];
+											});
 		tweet.tweetId = content.querySelector(".time a").getAttribute("data-conversation-id");
 	}
 
