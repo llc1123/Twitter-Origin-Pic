@@ -11,10 +11,6 @@
 	    {
 	      "matches": ["https://twitter.com/*"],
 	      "js": ["twitter.js"]
-	    },
-	    {
-	    	"matches": ["https://webcatalog-free.circle.ms/*"],
-	    	"js": ["webcatalog.js"]
 	    }
 	],
 	"options_page": "options.html",
