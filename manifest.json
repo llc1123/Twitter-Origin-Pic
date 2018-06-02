@@ -1,24 +1,31 @@
 {
-	"name": "Twitter Origin Pic",
-	"description": "Download the original picture file in twitter",
-	"version": "0.1.5",
-	"minimum_chrome_version": "22",
-	"permissions": [ "contextMenus", "activeTab", "downloads"],	
-	"background": {
-		"scripts": ["eventPage.js", "moment.min.js"]
-	},
-	"content_scripts": [
-	    {
-	      "matches": ["https://twitter.com/*"],
-	      "js": ["twitter.js"]
-	    }
-	],
-	"options_page": "options.html",
-	"icons": {
-		"16": "16.png",
-		"48": "48.png",
-		"128": "128.png"
-	},
-	"update_url": "http://clients2.google.com/service/update2/crx",
-	"manifest_version": 2
+  "name": "Twitter Origin Pic",
+  "description": "Download the original picture file in twitter",
+  "version": "0.2.0",
+  "minimum_chrome_version": "22",
+  "permissions": [
+    "contextMenus",
+    "activeTab",
+    "downloads",
+    "webRequest",
+    "webRequestBlocking",
+    "https://*.bilibili.com/*"
+  ],
+  "background": {
+    "scripts": ["eventPage.js", "moment.min.js"]
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://twitter.com/*"],
+      "js": ["twitter.js"]
+    }
+  ],
+  "options_page": "options.html",
+  "icons": {
+    "16": "16.png",
+    "48": "48.png",
+    "128": "128.png"
+  },
+  "update_url": "http://clients2.google.com/service/update2/crx",
+  "manifest_version": 2
 }
