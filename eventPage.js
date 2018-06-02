@@ -80,15 +80,3 @@ chrome.tabs.onUpdated.addListener(function() {
 })
 chrome.runtime.onInstalled.addListener(initialize)
 chrome.runtime.onStartup.addListener(initialize)
-
-chrome.webRequest.onBeforeSendHeaders.addListener(
-  function(details) {
-    details.requestHeaders.push({
-      name: 'X-BILIBILI-KEY-REAL-IP',
-      value: '45.90.22.222',
-    })
-    return { requestHeaders: details.requestHeaders }
-  },
-  { urls: ['https://*.bilibili.com/*'] },
-  ['blocking', 'requestHeaders'],
-)

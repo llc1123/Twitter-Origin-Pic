@@ -1,15 +1,12 @@
 {
   "name": "Twitter Origin Pic",
   "description": "Download the original picture file in twitter",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "minimum_chrome_version": "22",
   "permissions": [
     "contextMenus",
     "activeTab",
-    "downloads",
-    "webRequest",
-    "webRequestBlocking",
-    "https://*.bilibili.com/*"
+    "downloads"
   ],
   "background": {
     "scripts": ["eventPage.js", "moment.min.js"]
